@@ -4,8 +4,8 @@
 
     LoginViewModel = kendo.data.ObservableObject.extend({
         isLoggedIn: false,
-        username: "asd",
-        password: "asd",
+        username: "abc",
+        password: "abc",
 
         onLogin: function () {
             var that = this,
@@ -21,6 +21,8 @@
             var loginSuccess = function (){
                 that.set("isLoggedIn", true);
                 
+                $("#invalid-credentials").toggleClass("hidden", true);
+                
                 app.application.navigate('views/mainView.html');
 
                 $('#taptrip-div').show();
@@ -28,10 +30,9 @@
             
             var loginError = function (){
                 that.set("isLoggedIn", false);
-              
-                navigator.notification.alert("Both fields are required!",
-                    function () { }, "Login failed", 'OK');
                 
+                $("#invalid-credentials").toggleClass("hidden", false);
+                                
                 return;
             };
             

@@ -2,12 +2,14 @@
 	
     <header data-role="header">
 		<div data-role="navbar">
-            <a class="nav-button" data-align="left" data-role="button">BTN</a>
+            <a data-role="button" data-rel="drawer" href="#users-drawer" data-icon="drawer-button" data-align="left"></a>
 			&lt; username here &gt;
 			
 		</div>
 	</header>
 
+      
+    
 	<div id="task-container" class="tasks-view" >
         put list view here
 	</div>
@@ -20,4 +22,55 @@
             </div>
         </div>
     
-</div>
+    </div>
+
+    <script>
+        // reset global drawer instance, for demo purposes
+        kendo.mobile.ui.Drawer.current = null;
+    </script>
+
+    <style>
+        .km-ios #my-drawer .km-content, .km-android #my-drawer .km-content, .km-blackberry #my-drawer .km-content,
+        .km-ios #my-drawer .km-list > li, .km-android #my-drawer .km-list > li, .km-blackberry #my-drawer .km-list > li,
+        .km-ios #my-drawer .km-listview-link > .km-icon, .km-android #my-drawer .km-listview-link > .km-icon, .km-blackberry #my-drawer .km-listview-link > .km-icon,
+        .km-ios #my-drawer .km-list li > .km-icon, .km-android #my-drawer .km-list li > .km-icon, .km-blackberry #my-drawer .km-list li > .km-icon
+        {
+            background-color: #4e4e4e;
+            color: #fff;
+        }
+
+        .km-ios #my-drawer .km-group-title,
+        .km-blackberry #my-drawer .km-group-title
+        {
+            background-color: #6e6e6e;
+            color: #fff;
+        }
+
+        .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+        .km-settings:before, .km-settings:after { content: "\E0DA"; }
+        .km-off:before, .km-off:after { content: "\E0B9"; }
+
+    </style>
+    
+     <!-- Drawer  content-->
+    <div data-role="drawer" id="users-drawer" style="width: 270px" data-views="['/','tabstrip-mainview']">
+        <ul data-role="listview" data-type="group">
+            <li>Users
+                <ul>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Ivan</a></li>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Pesho</a></li>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Gosho</a></li>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Mom</a></li>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Dad</a></li>
+                    <li ><a href="#tabstrip-mainview" data-transition="none">Uncle</a></li>
+                </ul>
+            </li>
+            <li>Account
+                <ul>
+                    <li data-icon="settings">Settings</li>
+                    <li data-icon="off"><a href="">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+

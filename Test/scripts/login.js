@@ -49,8 +49,20 @@
             }
         }
     });
-
+    
+    AddTaskViewModel = kendo.data.ObservableObject.extend({
+        onClick: function(e) {
+            alert('asd');
+        },
+        description: 'test description',
+        title: 'test',
+        usersDataSource: function() {
+            return [{firstName:'John', lastName: 'Doe'}, {firstName:'Jane', lastName: 'Doe'}];
+        }
+    });
+    
     app.loginService = {
-        viewModel: new LoginViewModel()
+        viewModel: new LoginViewModel(),
+        addTask: new AddTaskViewModel()
     };
 })(window);

@@ -4,30 +4,44 @@
 		<div data-role="navbar">
             <a data-role="button" data-rel="drawer" href="#users-drawer" data-icon="drawer-button" data-align="left"></a>
 			&lt; username here &gt;
-			
+            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button" data-icon="action" ></a>
 		</div>
 	</header>
 
-      
+      <!-- Popover-->
+     <div data-role="popover" id="popover-people" data-popup='{"height": "15em", "width": "15em"}'>
+        <div data-role="view" data-title="People">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                </div>
+            </div>
+            <ul data-role="listview">
+                <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                <li><label>Josh Anderson<input type="checkbox"></label></li>
+                <li><label>Linda Anderson<input type="checkbox"></label></li>
+                <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                <li><label>James Williams<input type="checkbox"></label></li>
+                <li><label>Barbara Williams<input type="checkbox"></label></li>
+            </ul>
+        </div>
+    </div>
     
 	<div id="task-container" class="tasks-view" >
-        put list view here
+        put list view here!!!
 	</div>
     
-            <!--Footer-->
-        <div data-role="footer"  >
-            <div data-role="tabstrip" >
-                <a href="views/mainView.html" data-icon="home">Home</a>
-                <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
-            </div>
+    <!--Footer-->
+    <div data-role="footer"  >
+        <div data-role="tabstrip" >
+            <a href="views/mainView.html" data-icon="home">Home</a>
+            <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
         </div>
+    </div>
     
     </div>
 
-    <script>
-        // reset global drawer instance, for demo purposes
-        kendo.mobile.ui.Drawer.current = null;
-    </script>
 
     <style>
         .km-ios #my-drawer .km-content, .km-android #my-drawer .km-content, .km-blackberry #my-drawer .km-content,
@@ -50,8 +64,27 @@
         .km-settings:before, .km-settings:after { content: "\E0DA"; }
         .km-off:before, .km-off:after { content: "\E0B9"; }
 
+        .km-ios #popover .km-view-title,
+        .km-ios #popover-people .km-view-title
+        {
+            color: #fff;
+            text-shadow: 0 -1px rgba(0,0,0,.5);
+        }
+
+      
     </style>
     
+<script>
+    // reset global drawer instance
+     kendo.mobile.ui.Drawer.current = null;
+    
+    function closeParentPopover(e) 
+    {
+        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+        popover.close();
+    }
+</script>
+
      <!-- Drawer  content-->
     <div data-role="drawer" id="users-drawer" style="width: 270px" data-views="['/','tabstrip-mainview']">
         <ul data-role="listview" data-type="group">
@@ -74,3 +107,4 @@
         </ul>
     </div>
 
+  

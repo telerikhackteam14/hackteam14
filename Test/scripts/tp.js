@@ -5,9 +5,10 @@ var TeamPulse = function() {
 	this.storyID = 2;
 }
 
-TeamPulse.prototype = function() {
+TeamPulse.prototype = {
     login: function(username, pass, onSuccess, onError) {
-        $.ajax({
+        var that = this;
+        $.ajax({    
             url: this.baseUrl + '/Authenticate/WRAPv0.9',
             data: {
                 wrap_client_id: 'uri:TeamPulse',
@@ -18,7 +19,7 @@ TeamPulse.prototype = function() {
             success: function (data) {
                 var accessToken = data.match(/wrap_access_token=(.*?)&/)[1];
                 
-                this.accessToken = decodeURIComponent(accessToken);
+                that.accessToken = decodeURIComponent(accessToken);
                 
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -33,10 +34,13 @@ TeamPulse.prototype = function() {
     },
         
     getAllUsers: function(onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/users',
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -103,7 +107,6 @@ TeamPulse.prototype = function() {
             }
         });
     },
-
 
     getTasksForUser: function(userID, status, onSuccess, onError) {
         var oDataFilter = "$filter=AssignedToID eq " + userID;
@@ -182,6 +185,15 @@ TeamPulse.prototype = function() {
         });
     }
 }
-
-
+var teamPulse = new TeamPulse();
+teamPulse.login("test", "testtest", function() {
+        teamPulse.getAllUsers(function(data) {
+            var dataSource = [];
+            for(var i = 0; i < data.results.length; i++) {
+                dataSource.push({"DisplayName": data.results.displayname});
+                $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, true, true));
+            }
+            
+        });
+});
 

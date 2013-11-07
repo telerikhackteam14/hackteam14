@@ -52,13 +52,29 @@
     
     AddTaskViewModel = kendo.data.ObservableObject.extend({
         onClick: function(e) {
-            alert('asd');
+            alert('asd');    
         },
         description: 'test description',
         title: 'test',
-        usersDataSource: function() {
-            return [{firstName:'John', lastName: 'Doe'}, {firstName:'Jane', lastName: 'Doe'}];
-        }
+        usersDataSource: new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "GET",
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'WRAP access_token=' + teamPulse.accessToken); 
+                    },
+                    url: teamPulse.baseUrl + '/api/users'
+                },
+                schema: {
+                    total: 'totalResults',
+                    data: 'results',
+                    model: {
+                        id: 'id'
+                    }
+                }
+            }
+        })
     });
     
     app.loginService = {

@@ -16,13 +16,10 @@
             <input id="descriptionInput" type="text" data-bind="value: description" />
         </div>
         <div>
-            <select data-role='dropdownlist' data-bind='source: usersDataSource' data-text-field='firstName'>
-                
-            </select>
+            <select id="usersDropDownList"></select>
         </div>
     </div>
     
-        
     <div data-role="footer"  >
         <div data-role="tabstrip" >
             <a data-icon="home" data-bind="events: {click: onClick}">Home</a>

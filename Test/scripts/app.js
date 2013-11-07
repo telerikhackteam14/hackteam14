@@ -4,11 +4,12 @@
         os = kendo.support.mobileOS,
         statusBarStyle = os.ios && os.flatVersion >= 700 ? "black-translucent" : "black";
 
+        
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
     }, false);
 
-    app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout", statusBarStyle: statusBarStyle });
+    app.application = new kendo.mobile.Application(document.body, {transition: 'slide', layout: "tabstrip-layout", statusBarStyle: statusBarStyle });
 
     app.changeSkin = function (e) {
         if (e.sender.element.text() === "Flat") {

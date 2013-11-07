@@ -2,7 +2,6 @@
     var LoginViewModel,
         app = global.app = global.app || {};
 
-        
     LoginViewModel = kendo.data.ObservableObject.extend({
         isLoggedIn: false,
         username: "asd",
@@ -18,12 +17,26 @@
 
                 return;
             }
+                        
+            var loginSuccess = function (){
+                that.set("isLoggedIn", true);
+                
+                app.application.navigate('views/mainView.html');
 
-            that.set("isLoggedIn", true);            
+                $('#taptrip-div').show();
+            };
             
-            app.application.navigate('views/mainView.html');
-
-            $('#taptrip-div').show();
+            var loginError = function (){
+                that.set("isLoggedIn", false);
+              
+                navigator.notification.alert("Both fields are required!",
+                    function () { }, "Login failed", 'OK');
+                
+                return;
+            };
+            
+            teamPulse.login(username, password, loginSuccess, loginError);
+                                  
         },
 
         onLogout: function () {

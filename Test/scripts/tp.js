@@ -5,7 +5,7 @@ var TeamPulse = function() {
 	this.storyID = 2;
 }
 
-TeamPulse.prototype = function() {
+TeamPulse.prototype = {
     login: function(username, pass, onSuccess, onError) {
         $.ajax({
             url: this.baseUrl + '/Authenticate/WRAPv0.9',
@@ -182,6 +182,8 @@ TeamPulse.prototype = function() {
         });
     }
 }
+
+var teamPulse = new TeamPulse();
 
 
 

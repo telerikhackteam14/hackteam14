@@ -49,8 +49,45 @@
             }
         }
     });
+    
+    MainViewModel = kendo.data.ObservableObject.extend({
+        
+        success = function(data)
+        {
+            $("#workItems").kendoGrid({
+                dataSource: {
+                    data: data.results,
+                    pageSize: 100
+                },
+                //height: 430,
+                scrollable: true,
+                sortable: true,
+                filterable: true,
+                pageable: {
+                    input: true,
+                    numeric: false
+                },
+                columns: [
+                    { field: "id", title: "ID", width: "10%" },
+                    { field: "fields.Name", title: "Name", width: "40%" },
+                    { field: "type", title: "Type", width: "15%" },
+                    { field: "fields.Status", title: "Status", width: "15%" },
+                    { field: "fields.Tags", title: "Tags", width: "20%", template: "#if(data.fields.Tags != null) { # #=data.fields.Tags.join(', ')# #}#" }
+                ]
+            });        
+        }
+        
+    });
 
     app.loginService = {
-        viewModel: new LoginViewModel()
+        viewModel: new LoginViewModel(),
+        mainViewModel: new MainViewModel()
     };
+    
+    
 })(window);
+
+
+
+
+

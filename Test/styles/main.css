@@ -70,3 +70,34 @@
 {
     border-color: #fff;
 }
+
+
+.km-flat .km-left-drawer .km-content,
+.km-flat .km-left-drawer .km-list > li,
+.km-flat .km-left-drawer .km-listview-link > .km-icon,
+.km-flat .km-left-drawer .km-list li > .km-icon
+{
+    background-color: #4e4e4e;
+    color: #fff;
+}
+
+.km-flat .km-left-drawer .km-group-title
+{
+    background-color: #6e6e6e;
+    color: #fff;
+}
+
+.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+.km-settings:before, .km-settings:after { content: "\e20f"; }
+.km-off:before, .km-off:after { content: "\E0B9"; }
+.km-filter:before, .km-filter:after { content: "\E06C"; }
+.km-progress:before, .km-progress:after { content: "\E0BA"; }
+.km-plus:before, .km-plus:after { content: "\E200"; }
+.km-favs:before, .km-favs:after { content: "\E20c"; }
+
+.km-ios #popover .km-view-title,
+.km-ios #popover-people .km-view-title
+{
+    color: #fff;
+    text-shadow: 0 -1px rgba(0,0,0,.5);
+}

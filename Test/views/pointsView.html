@@ -5,7 +5,8 @@
             
 		</div>
 	</header>	
-    <div style="font-size: 8em; padding-top: .1em; font-weight: bold; text-align: center;">27</div>
+    <div style="font-size: 7em; padding-top: .1em; font-weight: bold; text-align: center;"><span style="display: block; font-size: .15em; margin-bottom: -1em;">This week</span>27</div>
+    <div style="font-size: 1.5em; padding-bottom: .3em;text-align: center; border-bottom: 1px solid rgba(255,255,255,0.4)">TOTAL POINTS: 174</div>
     
     <div id="chart" style="background: none; height: 15em;"></div>
     
@@ -13,11 +14,11 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "Past weeks stats",
+                    text: "Performance",
                     color: "#fff"
                 },
                 legend: {
-                    position: "bottom"
+                    visible: false
                 },
                 chartArea: {
                     background: ""
@@ -37,7 +38,8 @@
                     },
                     line: {
                         visible: false
-                    }
+                    },
+                    max: 40
                 },
                 categoryAxis: {
                     categories: [11, 12, 13, 14, 15, 16, 17, 18],
@@ -52,7 +54,7 @@
                 tooltip: {
                     visible: true,
                     format: "{0}%",
-                    template: "#= series.name #: #= value #"
+                    template: " #= value # PTS<br />WEEK #= category #",
                 }
             });
         }

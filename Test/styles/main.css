@@ -23,8 +23,17 @@
 .km-flat li.km-state-active .km-listview-label,
 .km-flat .km-state-active .km-listview-link:after
 {
-    color:#fff;
+    color:#171717;
 }
+
+
+.km-flat .km-popup.km-pane .km-navbar .km-button {
+ border-color: #14bbce;
+ padding: .3em .5em;
+    font-size: .8em;
+ line-height: 1em;
+}
+
 
 .km-flat .km-loader > *:not(h1),
 .km-flat .km-filter-wrap > input,
@@ -63,7 +72,8 @@
 .km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked
 {
-    background: rgba(255,255,255,.3);
+    background: rgba(255,255,255,.7);
+    color: #14bbce;
 }
 
 .km-flat .km-filter-wrap > input:focus

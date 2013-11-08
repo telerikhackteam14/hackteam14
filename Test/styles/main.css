@@ -111,3 +111,13 @@
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.5);
 }
+
+#taskListView .statusButtons {
+    display:none;
+    position: absolute;
+    top: .15em;
+    right: .5em;
+    width: 60px;
+    background-color: #bd2729;
+    color: #fff;
+}

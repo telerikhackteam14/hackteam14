@@ -65,6 +65,7 @@
                     if($(e.event.originalEvent.srcElement).closest('.statusButtons').length > 0) {
                         return;
                     }
+                    navigateToDetailsView($(e.event.originalEvent.srcElement).closest('.taskWrapper'))
                 },
                 enableSwipe: true
             });
@@ -73,26 +74,23 @@
     }
     function navigateToDetailsView(sender) {
         var taskId = $(sender).data('id');
-        teamPulse.getItemById(taskId, function(data) {
-            
-        });
-        app.application.navigate('views/taskDetailsView');
+        app.application.navigate('views/taskDetailsView.html?id='+ taskId);
     }
     function updateStatus(sender) {
         var taskId = $(sender).data('id');
         var taskStatus = $(sender).data('status');
-        debugger;
         teamPulse.updateItem(taskId, taskStatus, function(data) {
-           //rebind view
+           onMainViewLoaded();
         });
-        //teamPulse.getItemById(taskId, function(data) {   
     }
 </script>
 <script type="text/x-kendo-tmpl" id="singleTaskTemplate">
-    <h3>#:fields.Name#</h3>
-    <div class="statusButtons">
-        <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
-        <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
+    <div class="taskWrapper" data-id="#: id#">
+        <h3>#:fields.Name#</h3>
+        <div class="statusButtons">
+            <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
+            <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
+        </div>
     </div>
 </script>
 

@@ -26,11 +26,13 @@
                 </label>
             </li>
             <li>
-                <label for="descriptionInput">Date
-                <input id="descriptionInput" type="date"/>
-                </label>
-            </li>
-        </ul>
+                <label for="dateInput">Date
+                <input id="dateInput" type="date" data-bind="value: date"/>
+                </label>                
+            </li>            
+        </ul>        
+        <label id="createItemError" class="hidden"></label>                
+            
     </form>
     
     <div data-role="footer"  >

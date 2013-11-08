@@ -24,6 +24,15 @@ body, html {
     font-size: 1em;
 }
 
+.hidden {
+    display: none;
+}
+
+.higlight {
+    color: red;
+}
+
+
 /* IMAGE STYLES*/
 .img {
     background-image: url(../styles/images/icenium.png);

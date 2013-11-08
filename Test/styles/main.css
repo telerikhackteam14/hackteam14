@@ -1,3 +1,10 @@
+.hplogo {
+    display: block;
+    margin: 3em auto;
+    width: 242px;
+    height: 108px;
+    background: url('images/logo.png') no-repeat left top;
+}
 .km-flat .km-badge,
 .km-flat .km-rowinsert,
 .km-flat .km-rowdelete,

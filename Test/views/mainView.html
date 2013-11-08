@@ -1,4 +1,4 @@
-<div data-role="view" id="tabstrip-mainview" data-layout="databinding" class="main-view" data-init="onMainViewLoaded"> <!-- data-show="app.viewModels.activity.show"> -->
+<div data-role="view" id="tabstrip-mainview" data-layout="databinding" class="main-view" data-show="onShowMainView" data-init="onMainViewLoaded"> <!-- data-show="app.viewModels.activity.show"> -->
 	
     <header data-role="header">
 		<div data-role="navbar">
@@ -17,10 +17,10 @@
                     <a data-role="button" data-align="center" data-click="closeParentPopover">Apply</a>
                 </div>
             </div>
-            <ul data-role="listview">
-                <li><label>Not Done<input type="checkbox"></label></li>
-                <li><label>In progress<input type="checkbox"></label></li>
-                <li><label>Done<input type="checkbox"></label></li>
+            <ul data-role="listview" id="taskStatuses">
+                <li><label>Not Done<input type="checkbox" checked = "checked" data-value="Not Done"></label></li>
+                <li><label>In progress<input type="checkbox" checked = "checked" data-value="In Progress"></label></li>
+                <li><label>Done<input type="checkbox" data-value="Done"></label></li>
             </ul>
         </div>
     </div>
@@ -40,26 +40,84 @@
         </div>
     </div>
     
-    </div>
+</div>
     
 <script>
     // reset global drawer instance
      kendo.mobile.ui.Drawer.current = null;
     
+
+    function getCurrentStatuses()
+    {
+        var statusElements = $("#taskStatuses").find(":checked");
+        var statuses = [];
+        for(var i = 0; i < statusElements.length; i++)
+        {
+             statuses.push($(statusElements[i]).data("value"));        
+        }
+        
+        return statuses;
+    }
+    
     function closeParentPopover(e) 
     {
         var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
         popover.close();
+        onShowMainView();
     }
-    function onMainViewLoaded() {
-        $("#username").text(teamPulse.currentUser.displayName);
-        teamPulse.getTasksForUser(teamPulse.currentUser.id, null, function(data) {
-            $('#taskListView').kendoMobileListView({ 
+
+    function filterTasks(tasks)
+    {
+        var statuses = getCurrentStatuses();   
+        
+        var result = jQuery.grep(tasks, function( item, index ) 
+        {
+            for (var i = 0; i < statuses.length ; i++)
+            {
+                if (item.fields.Status == statuses[i])
+                    return true;
+            }
+            
+            return false;
+        });
+        
+        
+        return result;
+    }
+    
+    function onMainViewLoaded() 
+    {
+        teamPulse.getAllUsers(function(data) {
+            $('#usersListView').kendoMobileListView({ 
                 dataSource: data.results,
+                template: $("#drawerUserTemplate").text()
+            });
+        });
+    }
+    
+    function onShowMainView(e) 
+    {
+       //debugger;
+        if (!teamPulse.selectedUser)
+        {
+            teamPulse.selectedUser = teamPulse.currentUser;            
+        }
+        
+        var userID = teamPulse.selectedUser.id;
+        var userName = teamPulse.selectedUser.displayName;
+
+        $("#username").text(userName);        
+        
+        teamPulse.getTasksForUser(userID, null, function(data) {
+            
+            var filteredTasks = filterTasks(data.results);
+            
+            $('#taskListView').kendoMobileListView({ 
+                dataSource: filteredTasks,
                 template: $("#singleTaskTemplate").text()
             }).kendoTouch({
                 swipe: function(e) {
-                    var button = kendo.fx($(e.touch.currentTarget).find(".statusButtons")),
+                    var button = kendo.fx($(e.touch.currentTarget).find(".statusButtons"));
                         $buttonEl = $(button.element);
                     var buttonStatus = $buttonEl.data('status');
                     if(buttonStatus == "In Progress")
@@ -77,69 +135,66 @@
                     if($(e.event.originalEvent.srcElement).closest('.statusButtons').length > 0) {
                         return;
                     }
-                    navigateToDetailsView($(e.event.originalEvent.srcElement).closest('li').find('.taskWrapper'))
-                },
-                touchstart: function(e) {
-                    var listview = $("#taskListView").data("kendoMobileListView"),
-                        wrapper = $(e.touch.target).find(".statusButtons:visible");
-                    
-                    if (wrapper[0]) {
-                        wrapper.hide();
-                        
-                        //prevent `swipe`
-                        this.events.cancel();
-                    }
-                    else {
-                        listview.items().find(".statusButtons:visible").hide();
-                    }
+                    navigateToDetailsView($(e.event.originalEvent.srcElement).closest('.taskWrapper'))
                 },
                 filter: ">li",
                 enableSwipe: true
             });
         })
-        
     }
+    
+    function navigateToMainView(sender) 
+    {
+        //debugger;
+        var userID = $(sender).data('id');
+        var displayName = $(sender).data('displayname');
+        
+        teamPulse.selectedUser = {id:userID, displayName:displayName};
+        
+        app.application.navigate('#tabstrip-mainview?id='+userID);
+    }
+
+    
     function navigateToDetailsView(sender) {
         var taskId = $(sender).data('id');
-        console.log(taskId);
         app.application.navigate('views/taskDetailsView.html?id='+ taskId);
     }
     function updateStatus(sender) {
+        debugger
         var taskId = $(sender).data('id');
         var taskStatus = $(sender).data('status');
         teamPulse.updateItem(taskId, taskStatus, function(data) {
-           onMainViewLoaded();
+           onShowMainView();
         });
     }
 </script>
+
+<!-- list item templates -->
 <script type="text/x-kendo-tmpl" id="singleTaskTemplate">
     <div class="taskWrapper" data-id="#: id#">
-        <span class="status #: fields.Status#"></span>
+        <span class="status #: fields.Status.replace(/ /g,'')#"></span>
         <h3>#:fields.Name#</h3>
-        <div class="statusButtons" data-status="#: fields.Status #">
-            <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
-            <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
+        <div class="statusButtons" data-status="#: fields.Status#">
+            <a class="on-it-button" data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
+            <a class="done-button" data-role="button" data-id="#: id#" data-status="Done" onclick="updateStatus(this)">Done</a>
         </div>
     </div>
 </script>
 
+<script type="text/x-kendo-tmpl" id="drawerUserTemplate">
+    <a onclick="navigateToMainView(this)" data-displayName="#:displayName#" data-id="#:id#">#:displayName#</a>
+</script>
+
      <!-- Drawer  content-->
-    <div data-role="drawer" id="users-drawer" style="width: 270px" data-views="['/','tabstrip-mainview']">
-        <ul data-role="listview" data-type="group">
+    <div data-role="drawer" id="users-drawer" style="width: 270px" data-views="['/','tabstrip-mainview']" data-model="app.loginService.viewModel">
+        <ul data-role="listview" data-type="group" >
             <li>Users
-                <ul>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Ivan</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Pesho</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Gosho</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Mom</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Dad</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Uncle</a></li>
+                <ul id="usersListView">
                 </ul>
             </li>
             <li>Account
                 <ul>
-                    <li data-icon="settings">Settings</li>
-                    <li data-icon="off"><a href="">Log Out</a></li>
+                   <li><a data-bind="click: onLogout">Log Out</a></li>
                 </ul>
             </li>
         </ul>

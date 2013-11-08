@@ -2,13 +2,16 @@
     app = global.app = global.app || {};
 
     AddTaskViewModel = kendo.data.ObservableObject.extend({
-        onDoneClick: function(e) {                            
-            if (this.title.trim() === "" || this.description.trim()=== "" || this.date === undefined) {                
+        onDoneClick: function(e) {    
+            debugger;
+            if (this.title.trim() === "" || this.description.trim()=== "" || this.date === undefined) {  
+                
                 $('#createItemError').text("Title, description and date are required");
                 $("#createItemError").toggleClass("hidden", false);                                                                                 
                 return;
             }
-           var onSuccess = function(data)
+           
+            var onSuccess = function(data)
             {            
                 $("#createItemError").toggleClass("hidden", true);
                 app.application.navigate('views/mainView.html');
@@ -20,7 +23,7 @@
                 $("#createItemError").toggleClass("hidden", false);     
                 
             };
-           teamPulse.createNewItem(this.title, this.description,this.date,onSuccess,onError);
+           teamPulse.createNewItem(this.title, this.description,this.date,$('#usersDropDownList').val(), onSuccess,onError);
         },
         onCancelClick: function(e) {
             app.application.navigate('views/mainView.html');

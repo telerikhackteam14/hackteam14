@@ -18,11 +18,19 @@
         <div>
             <select id="usersDropDownList"></select>
         </div>
+        <div>
+            <label for="descriptionInput">Date</label>
+            <input id="descriptionInput" type="date"/>
+        </div>
+        <div>
+            <button data-bind="click: onDoneClick">Done</button>
+            <button data-bind="click: onCancelClick">Cancel</button>
+        </div>
     </div>
     
     <div data-role="footer"  >
         <div data-role="tabstrip" >
-            <a data-icon="home" data-bind="events: {click: onClick}">Home</a>
+            <a href="views/mainView.html" data-icon="home">Home</a>
             <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
         </div>
     </div>

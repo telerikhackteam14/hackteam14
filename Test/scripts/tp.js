@@ -185,6 +185,7 @@ TeamPulse.prototype = {
         });
     }
 }
+
 var teamPulse = new TeamPulse();
 teamPulse.login("test", "testtest", function() {
         teamPulse.getAllUsers(function(data) {
@@ -196,4 +197,6 @@ teamPulse.login("test", "testtest", function() {
             
         });
 });
+
+var teamPulse = new TeamPulse();
 

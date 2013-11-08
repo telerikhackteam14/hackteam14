@@ -205,18 +205,18 @@ teamPulse.login("test", "testtest", function() {
         teamPulse.getCurrentUser(function(data) {
             teamPulse.currentUser = data; 
             teamPulse.getAllUsers(function(data) {
-            var dataSource = [];
-            var users = data.results;
-            for(var i = 0; i < users.length; i++) {
-                dataSource.push({"DisplayName": users[i].displayname});
-                if(teamPulse.currentUser.id == users[i].id) {
-                    $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, true));    
-                } else {
-                    $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, false));    
+                var dataSource = [];
+                var users = data.results;
+                for(var i = 0; i < users.length; i++) {
+                    dataSource.push({"DisplayName": users[i].displayname});
+                    if(teamPulse.currentUser.id == users[i].id) {
+                        $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, true));    
+                    } else {
+                        $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, false));    
+                    }
+                    
                 }
-                
-            }
-        });
+            });
         });
         
 });

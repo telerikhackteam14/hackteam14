@@ -71,6 +71,8 @@
         onCancelClick: function(e) {
             app.application.navigate('#tabstrip-mainview');
         },      
+        description: 'test description',
+        title: 'test'
     });
     AddTaskViewModel = kendo.data.ObservableObject.extend({
         onDoneClick: function(e) {
@@ -79,8 +81,12 @@
         onCancelClick: function(e) {
             app.application.navigate('#tabstrip-mainview');
         },
+        onDetailsViewOpen: function(e) {
+            
+        },
         description: 'test description',
-        title: 'test'
+        title: 'test',
+        TestId: '123'
     });
     
     app.loginService = {

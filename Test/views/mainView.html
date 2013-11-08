@@ -97,7 +97,6 @@
     
     function onShowMainView(e) 
     {
-       //debugger;
         if (!teamPulse.selectedUser)
         {
             teamPulse.selectedUser = teamPulse.currentUser;            
@@ -145,7 +144,6 @@
     
     function navigateToMainView(sender) 
     {
-        //debugger;
         var userID = $(sender).data('id');
         var displayName = $(sender).data('displayname');
         
@@ -160,7 +158,6 @@
         app.application.navigate('views/taskDetailsView.html?id='+ taskId);
     }
     function updateStatus(sender) {
-        debugger
         var taskId = $(sender).data('id');
         var taskStatus = $(sender).data('status');
         teamPulse.updateItem(taskId, taskStatus, function(data) {

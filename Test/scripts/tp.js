@@ -4,6 +4,7 @@ var TeamPulse = function() {
     this.projectID = 1;
 	this.storyID = 2;
     this.currentUser = null;
+    this.status = "Done";
 }
 
 TeamPulse.prototype = {
@@ -19,12 +20,16 @@ TeamPulse.prototype = {
             type: "POST",
             success: function (data) {
                 var accessToken = data.match(/wrap_access_token=(.*?)&/)[1];
-                
                 that.accessToken = decodeURIComponent(accessToken);
                 
-                if(typeof onSuccess === 'function') {
-            		onSuccess(data);
-        		}
+                that.getCurrentUser(function(data) {
+                    that.currentUser = data; 
+                    if(typeof onSuccess === 'function') {
+            		    onSuccess(data);
+        		    }
+                });
+                
+                
             },
             error: function (a, b, c) {
                 if(typeof onError === 'function') {
@@ -118,7 +123,7 @@ TeamPulse.prototype = {
 
     getTasksForUser: function(userID, status, onSuccess, onError) {
         var that = this;
-        var oDataFilter = "$filter=AssignedToID eq " + userID;
+        var oDataFilter = "?$filter=AssignedToID eq " + userID;
         if(status) {
         	oDataFilter += " and Status eq '" + status + "'";
         }
@@ -127,7 +132,9 @@ TeamPulse.prototype = {
             url: this.baseUrl + '/api/workitems' + oDataFilter,
             data: null,
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); },
+            beforeSend: function (xhr) { 
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -201,23 +208,23 @@ TeamPulse.prototype = {
 }
 
 var teamPulse = new TeamPulse();
-teamPulse.login("test", "testtest", function() {
-        teamPulse.getCurrentUser(function(data) {
-            teamPulse.currentUser = data; 
-            teamPulse.getAllUsers(function(data) {
-                var dataSource = [];
-                var users = data.results;
-                for(var i = 0; i < users.length; i++) {
-                    dataSource.push({"DisplayName": users[i].displayname});
-                    if(teamPulse.currentUser.id == users[i].id) {
-                        $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, true));    
-                    } else {
-                        $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, false));    
-                    }
+//teamPulse.login("test", "testtest", function() {
+        //teamPulse.getCurrentUser(function(data) {
+        //    teamPulse.currentUser = data; 
+        //    teamPulse.getAllUsers(function(data) {
+        //        var dataSource = [];
+        //        var users = data.results;
+        //        for(var i = 0; i < users.length; i++) {
+        //            dataSource.push({"DisplayName": users[i].displayname});
+        //            if(teamPulse.currentUser.id == users[i].id) {
+        //                $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, true));    
+        //            } else {
+        //                $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, false));    
+        //            }
                     
-                }
-            });
-        });
+        //        }
+        //    });
+        //});
         
-});
+//});
 

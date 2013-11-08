@@ -1,4 +1,4 @@
-<div data-role="view" id="tabstrip-taskDetails" data-layout="default" class="tasks-view" data-model="app.taskService.taskDetails">
+<div data-role="view" id="tabstrip-taskDetails" data-layout="default" class="tasks-view" data-model="app.taskService.taskDetails" data-init="onDetailsViewLoaded">
     <header data-role="header">
 		<div data-role="navbar">
 			Task
@@ -35,3 +35,13 @@
         </div>
     </div>
 </div>
+<script>
+    function onDetailsViewLoaded(e) {
+        debugger;
+        var taskId = e.view.params.id;
+        teamPulse.getItemById(taskId, function(data) {
+            $("#titleInput").val(data.fields.Name);
+            $("#descriptionInput").val(data.fields.Description);
+        });
+    }
+</script>

@@ -4,8 +4,8 @@
 
     LoginViewModel = kendo.data.ObservableObject.extend({
         isLoggedIn: false,
-        username: "abc",
-        password: "abc",
+        username: "test",
+        password: "testtest",
 
         onLogin: function () {
             var that = this,

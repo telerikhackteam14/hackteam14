@@ -87,10 +87,10 @@
 </script>
 <script type="text/x-kendo-tmpl" id="singleTaskTemplate">
     <div class="taskWrapper" data-id="#: id#">
+        <span class="status #: fields.Status#"></span>
         <h3>#:fields.Name#</h3>
         <div class="statusButtons">
-            <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
-            <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
+            <a class="on-it-button" data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a><a class="done-button" data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
         </div>
     </div>
 </script>

@@ -23,7 +23,7 @@
 .km-flat li.km-state-active .km-listview-label,
 .km-flat .km-state-active .km-listview-link:after
 {
-    color: red;
+    color:#fff;
 }
 
 .km-flat .km-loader > *:not(h1),
@@ -32,14 +32,14 @@
 .km-root .km-flat .km-scroller-refresh span:not(.km-template),
 .km-flat .km-listview-label input[type=checkbox]:checked:after
 {
-    background: #fff3c9;
+    background: #14bbce;
 }
 
 .km-flat .km-switch-handle,
 .km-flat .k-slider-selection,
 .km-flat .km-switch-background
 {
-    color: #ff6363;
+    color: #fff;
 }
 
 .km-flat .km-loader,
@@ -63,10 +63,10 @@
 .km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked
 {
-    background: #ff6363;
+    background: rgba(255,255,255,.3);
 }
 
 .km-flat .km-filter-wrap > input:focus
 {
-    border-color: #ff6363;
+    border-color: #fff;
 }

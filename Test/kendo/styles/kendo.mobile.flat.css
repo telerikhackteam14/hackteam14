@@ -123,7 +123,7 @@
   padding: 0;
 }
 .km-footer {
-  background: #1a1a1a;
+  background: #14bbce;
 }
 [data-role="layout"] {
   display: none;
@@ -451,7 +451,7 @@
 .km-android .km-state-disabled .km-button,
 .km-blackberry .km-state-disabled .km-button,
 .km-meego .km-state-disabled .km-button {
-  color: #aaa;
+  color: #fff;
   text-shadow: none;
 }
 .km-tabstrip,
@@ -494,7 +494,7 @@
   overflow: hidden;
   display: block;
   border-width: 0 0 1px 0;
-  background-color: #fff;
+  background-color: #14bbce;
 }
 .km-root div:-moz-any(.km-toolbar,.km-navbar) {
   overflow: visible;
@@ -2256,7 +2256,7 @@ body:before {
 .km-flat .km-navbar,
 .km-flat .km-content {
   color: #4c5356;
-  background: #f4f4f4;
+  background: #14bbce;
 }
 .km-flat,
 .km-flat * {
@@ -2269,7 +2269,7 @@ body:before {
 }
 /* NavBar */
 .km-flat .km-navbar {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .km-flat .km-header .km-navbar {
   border-width: 0 0 1px;
@@ -2318,7 +2318,7 @@ body:before {
   line-height: 1.4em;
   color: #4c5356;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #f4f4f4;
+  background-color: #14bbce;
 }
 .km-flat .km-detaildisclose {
   min-width: 1.8em;
@@ -2386,7 +2386,7 @@ body:before {
   border-width: 0;
 }
 .km-flat .km-switch-handle {
-  background: #f4f4f4;
+  background: #14bbce;
   width: 1.6em;
   margin: 0 4px 0 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -2515,7 +2515,7 @@ body:before {
   -webkit-border-radius: 2px;
 }
 .km-flat .km-group-title {
-  background: #f4f4f4;
+  background: #14bbce;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-width: 1px 0;
 }
@@ -2682,7 +2682,7 @@ body:before {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  background: #f4f4f4;
+  background: #14bbce;
 }
 .km-flat .km-listview-label input[type=radio] {
   width: 1.2em;

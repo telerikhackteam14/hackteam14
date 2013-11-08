@@ -53,21 +53,47 @@
     }
     function onMainViewLoaded() {
         $("#username").text(teamPulse.currentUser.displayName);
-        teamPulse.getTasksForUser(teamPulse.currentUser.id, null, function(data){
+        teamPulse.getTasksForUser(teamPulse.currentUser.id, null, function(data) {
             $('#taskListView').kendoMobileListView({ 
                 dataSource: data.results,
                 template: $("#singleTaskTemplate").text()
             }).kendoTouch({
                 swipe: function(e) {
-                    var button = kendo.fx($(e.touch.currentTarget).find(".statusButtons"));
+                    var button = kendo.fx($(e.touch.currentTarget).find(".statusButtons")),
+                        $buttonEl = $(button.element);
+                    var buttonStatus = $buttonEl.data('status');
+                    if(buttonStatus == "In Progress")
+                    {
+                        $($buttonEl.find('a')[0]).hide();
+                    }
+                    else if(buttonStatus == "Done")
+                    {
+                        $($buttonEl.find('a')[0]).hide();
+                        $($buttonEl.find('a')[1]).hide();
+                    }
                     button.expand().duration(200).play();
                 },
                 tap: function(e) {
                     if($(e.event.originalEvent.srcElement).closest('.statusButtons').length > 0) {
                         return;
                     }
-                    navigateToDetailsView($(e.event.originalEvent.srcElement).closest('.taskWrapper'))
+                    navigateToDetailsView($(e.event.originalEvent.srcElement).closest('li').find('.taskWrapper'))
                 },
+                touchstart: function(e) {
+                    var listview = $("#taskListView").data("kendoMobileListView"),
+                        wrapper = $(e.touch.target).find(".statusButtons:visible");
+                    
+                    if (wrapper[0]) {
+                        wrapper.hide();
+                        
+                        //prevent `swipe`
+                        this.events.cancel();
+                    }
+                    else {
+                        listview.items().find(".statusButtons:visible").hide();
+                    }
+                },
+                filter: ">li",
                 enableSwipe: true
             });
         })
@@ -75,6 +101,7 @@
     }
     function navigateToDetailsView(sender) {
         var taskId = $(sender).data('id');
+        console.log(taskId);
         app.application.navigate('views/taskDetailsView.html?id='+ taskId);
     }
     function updateStatus(sender) {
@@ -87,8 +114,9 @@
 </script>
 <script type="text/x-kendo-tmpl" id="singleTaskTemplate">
     <div class="taskWrapper" data-id="#: id#">
+        <span class="status #: fields.Status#"></span>
         <h3>#:fields.Name#</h3>
-        <div class="statusButtons">
+        <div class="statusButtons" data-status="#: fields.Status #">
             <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
             <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
         </div>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>785457f3-04c6-4a29-8f72-0276b75c8182</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
-    <AppIdentifier>com.telerik.Test</AppIdentifier>
+    <AppIdentifier>com.telerik.HomePulse</AppIdentifier>
     <ProjectName>Test</ProjectName>
     <IsRunnable>true</IsRunnable>
     <FrameworkVersion>3.0.0</FrameworkVersion>

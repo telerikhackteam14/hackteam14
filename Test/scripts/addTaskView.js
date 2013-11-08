@@ -3,8 +3,8 @@
 
     AddTaskViewModel = kendo.data.ObservableObject.extend({
         onDoneClick: function(e) {    
-            debugger;
-            if (this.title.trim() === "" || this.description.trim()=== "" || this.date === undefined) {  
+            
+            if (this.title.trim() === "" || this.description.trim()=== "") {  
                 
                 $('#createItemError').text("Title, description and date are required");
                 $("#createItemError").toggleClass("hidden", false);                                                                                 
@@ -31,9 +31,9 @@
         onDetailsViewOpen: function(e) {
             
         },
-        description: 'test description',
-        title: 'test',
-        TestId: '123'
+        description: '',
+        title: '',
+        TestId: ''
     });
     
     if (!app.taskService){

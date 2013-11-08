@@ -5,7 +5,6 @@ var TeamPulse = function() {
 	this.storyID = 2;
     this.currentUser = null;
     this.status = "Done";
-    this.selectedUser = null;
 }
 
 TeamPulse.prototype = {
@@ -149,9 +148,10 @@ TeamPulse.prototype = {
         });
     },
         
-    createNewItem: function(name, description, AssignDate, onSuccess, onError) {
+    createNewItem: function(name, description, AssignDate, userId, onSuccess, onError) {
         var fields = {
             'Name': name,
+            'AssignedToID' : userId,
             'Description': description,
             'ParentID': this.storyID,
             'tp_Assigndate_cf': AssignDate

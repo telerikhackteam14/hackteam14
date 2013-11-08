@@ -37,7 +37,7 @@
 .km-flat .km-popup.km-pane .km-navbar .km-button {
  border-color: #14bbce;
  padding: .3em .5em;
-   font-size: .8em;
+    font-size: .8em;
  line-height: 1em;
 }
 
@@ -162,11 +162,6 @@ padding-top: 0;
 background-clip: border-box;
 }
 
-.km-on-ios.km-black-translucent-status-bar.km-app #users-drawer .km-content {
-padding-top: 1.4em;
-background-clip: border-box;
-}
-
 span.status {
     position: absolute;
     top: -.2em;
@@ -177,10 +172,10 @@ span.status {
     line-height: inherit;
     content: "&nbsp;";
 }
-.Not {
+.NotDone {
     background-color: #ff0000;
 }
-.Progress, .km-button.on-it-button {
+.InProgress, .km-button.on-it-button {
     background-color: #ffb400;
 }
 .Done, .km-button.done-button {
@@ -193,9 +188,6 @@ span.status {
 #task-container .km-list > li h3 {
     padding-left: .8em;
 }
-
-
-
 
 .total-points {
     font-size: 1.5em;

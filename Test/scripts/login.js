@@ -4,8 +4,8 @@
 
     LoginViewModel = kendo.data.ObservableObject.extend({
         isLoggedIn: false,
-        username: "test",
-        password: "testtest",
+        username: "",
+        password: "",
 
         onLogin: function () {
             var that = this,
@@ -41,11 +41,15 @@
         },
 
         onLogout: function () {
-            var that = this;
-
+            $("#users-drawer").data("kendoMobileDrawer").hide();
+            //$("#invalid-credentials").toggleClass("hidden", true);
+            
+            var that = this; 
             that.clearForm();
-            that.set("isLoggedIn", false);
+            that.set("isLoggedIn", false); 
+            app.application.navigate('index.html');
         },
+
 
         clearForm: function () {
             var that = this;

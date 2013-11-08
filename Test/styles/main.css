@@ -37,7 +37,7 @@
 .km-flat .km-popup.km-pane .km-navbar .km-button {
  border-color: #14bbce;
  padding: .3em .5em;
-    font-size: .8em;
+   font-size: .8em;
  line-height: 1em;
 }
 
@@ -159,6 +159,11 @@
 
 .km-on-ios.km-black-translucent-status-bar.km-app .km-popup .km-header .km-navbar {
 padding-top: 0;
+background-clip: border-box;
+}
+
+.km-on-ios.km-black-translucent-status-bar.km-app #users-drawer .km-content {
+padding-top: 1.4em;
 background-clip: border-box;
 }
 

@@ -1,8 +1,9 @@
 <div data-role="view" id="tabstrip-addtask" data-layout="default" class="tasks-view" data-model="app.taskService.addTask">
     <header data-role="header">
 		<div data-role="navbar">
-			Task
-			<a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+			Add New Task
+            <a class="nav-button" data-align="left" data-role="button" data-bind="click: onCancelClick">Cancel</a>
+			<a class="nav-button" data-align="right" data-role="button" data-bind="click: onDoneClick">Done</a>
 		</div>
 	</header>	
     
@@ -22,16 +23,13 @@
             <label for="descriptionInput">Date</label>
             <input id="descriptionInput" type="date"/>
         </div>
-        <div>
-            <button data-bind="click: onDoneClick">Done</button>
-            <button data-bind="click: onCancelClick">Cancel</button>
-        </div>
     </div>
     
     <div data-role="footer"  >
         <div data-role="tabstrip" >
-            <a href="views/mainView.html" data-icon="home">Home</a>
-            <a href="views/addTaskView.html" data-icon="mostrecent">Add</a>
+            <a href="views/pointsView.html" data-icon="favs">My Points</a>
+            <a href="views/mainView.html" data-icon="progress">My Tasks</a>
+            <a href="views/addTaskView.html" data-icon="plus">New Task</a>
             <a data-icon="mostrecent" data-bind="click: onDetailsViewOpen" data-id="#= TestId#"> Details</a>
         </div>
     </div>

@@ -1,22 +1,38 @@
-<div data-role="view" id="tabstrip-addtask" data-layout="default" class="tasks-view"> <!-- data-show="app.viewModels.activity.show"> -->
-	
+<div data-role="view" id="tabstrip-addtask" data-layout="default" class="tasks-view" data-model="app.loginService.addTask">
     <header data-role="header">
 		<div data-role="navbar">
 			Task
 			<a class="nav-button" data-align="left" data-role="backbutton">Back</a>
 		</div>
-	</header>
-
-	<div id="task-container" class="tasks-view" >
-        Abadaba
-	</div>
+	</header>	
     
-    
-         <!--Footer-->
-        <div data-role="footer"  >
-            <div data-role="tabstrip" >
-                <a href="views/mainView.html" data-icon="home">Home</a>
-                <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
-            </div>
+    <div> 
+        <div>
+            <label for="titleInput">Title</label>
+            <input id="titleInput" type="text" data-bind="value: title" />
         </div>
+        <div>
+            <label for="descriptionInput">Description</label>
+            <input id="descriptionInput" type="text" data-bind="value: description" />
+        </div>
+        <div>
+            <select id="usersDropDownList"></select>
+        </div>
+        <div>
+            <label for="descriptionInput">Date</label>
+            <input id="descriptionInput" type="date"/>
+        </div>
+        <div>
+            <button data-bind="click: onDoneClick">Done</button>
+            <button data-bind="click: onCancelClick">Cancel</button>
+        </div>
+    </div>
+    
+    <div data-role="footer"  >
+        <div data-role="tabstrip" >
+            <a href="views/mainView.html" data-icon="home">Home</a>
+            <a href="views/addTaskView.html" data-icon="mostrecent">Add</a>
+            <a data-icon="mostrecent" data-bind="click: onDetailsViewOpen" data-id="#= TestId#"> Details</a>
+        </div>
+    </div>
 </div>

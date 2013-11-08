@@ -1,4 +1,4 @@
-<div data-role="view" id="tabstrip-mainview" data-layout="default" class="main-view"> <!-- data-show="app.viewModels.activity.show"> -->
+<div data-role="view" id="tabstrip-mainview" data-layout="databinding" class="main-view" data-init="onMainViewLoaded"> <!-- data-show="app.viewModels.activity.show"> -->
 	
     <header data-role="header">
 		<div data-role="navbar">
@@ -29,7 +29,9 @@
     </div>
     
 	<div id="task-container" class="tasks-view" >
-        put list view here!!!
+        <ul id="taskListView">
+        
+        </ul>
 	</div>
     
     <!--Footer-->
@@ -71,7 +73,15 @@
             text-shadow: 0 -1px rgba(0,0,0,.5);
         }
 
-      
+          #taskListView .statusButtons {
+            display:none;
+            position: absolute;
+            top: .15em;
+            right: .5em;
+            width: 60px;
+            background-color: #bd2729;
+            color: #fff;
+        }
     </style>
     
 <script>
@@ -83,6 +93,49 @@
         var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
         popover.close();
     }
+    function onMainViewLoaded() {
+        teamPulse.getTasksForUser(teamPulse.currentUser.id, null, function(data){
+            $('#taskListView').kendoMobileListView({ 
+                dataSource: data.results,
+                template: $("#singleTaskTemplate").text()
+            }).kendoTouch({
+                swipe: function(e) {
+                    var button = kendo.fx($(e.touch.currentTarget).find(".statusButtons"));
+                    button.expand().duration(200).play();
+                },
+                tap: function(e) {
+                    if($(e.event.originalEvent.srcElement).closest('.statusButtons').length > 0) {
+                        return;
+                    }
+                },
+                enableSwipe: true
+            });
+        })
+        
+    }
+    function navigateToDetailsView(sender) {
+        var taskId = $(sender).data('id');
+        teamPulse.getItemById(taskId, function(data) {
+            
+        });
+        app.application.navigate('views/taskDetailsView');
+    }
+    function updateStatus(sender) {
+        var taskId = $(sender).data('id');
+        var taskStatus = $(sender).data('status');
+        debugger;
+        teamPulse.updateItem(taskId, taskStatus, function(data) {
+           //rebind view
+        });
+        //teamPulse.getItemById(taskId, function(data) {   
+    }
+</script>
+<script type="text/x-kendo-tmpl" id="singleTaskTemplate">
+    <h3>#:fields.Name#</h3>
+    <div class="statusButtons">
+        <a data-role="button" data-id="#: id#" data-status="In Progress" onclick="updateStatus(this)">On It!</a>
+        <a data-role="button" data-id="#: id#" data-status="Done" onClick="updateStatus(this)">Done</a>
+    </div>
 </script>
 
      <!-- Drawer  content-->

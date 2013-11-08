@@ -101,3 +101,8 @@
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.5);
 }
+
+.hidden
+{    
+    display: none;
+}

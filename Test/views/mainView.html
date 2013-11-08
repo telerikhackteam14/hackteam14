@@ -2,109 +2,23 @@
 	
     <header data-role="header">
 		<div data-role="navbar">
-            <a data-role="button" data-rel="drawer" href="#users-drawer" data-icon="drawer-button" data-align="left"></a>
+            <a class="nav-button" data-align="left" data-role="button">BTN</a>
 			&lt; username here &gt;
-            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button" data-icon="action" ></a>
+			
 		</div>
 	</header>
 
-      <!-- Popover-->
-     <div data-role="popover" id="popover-people" data-popup='{"height": "15em", "width": "15em"}'>
-        <div data-role="view" data-title="People">
-            <div data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
-                </div>
-            </div>
-            <ul data-role="listview">
-                <li><label>Isabella Anderson<input type="checkbox"></label></li>
-                <li><label>Josh Anderson<input type="checkbox"></label></li>
-                <li><label>Linda Anderson<input type="checkbox"></label></li>
-                <li><label>Oliver Anderson<input type="checkbox"></label></li>
-                <li><label>James Williams<input type="checkbox"></label></li>
-                <li><label>Barbara Williams<input type="checkbox"></label></li>
-            </ul>
-        </div>
-    </div>
-    
 	<div id="task-container" class="tasks-view" >
-        put list view here!!!
+        put list view here
 	</div>
     
-    <!--Footer-->
+            <!--Footer-->
     <div data-role="footer"  >
         <div data-role="tabstrip" >
             <a href="views/mainView.html" data-icon="home">Home</a>
             <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
+            <a href="views/taskDetailsView.html" data-icon="mostrecent"> Details</a>
         </div>
     </div>
     
-    </div>
-
-
-    <style>
-        .km-ios #my-drawer .km-content, .km-android #my-drawer .km-content, .km-blackberry #my-drawer .km-content,
-        .km-ios #my-drawer .km-list > li, .km-android #my-drawer .km-list > li, .km-blackberry #my-drawer .km-list > li,
-        .km-ios #my-drawer .km-listview-link > .km-icon, .km-android #my-drawer .km-listview-link > .km-icon, .km-blackberry #my-drawer .km-listview-link > .km-icon,
-        .km-ios #my-drawer .km-list li > .km-icon, .km-android #my-drawer .km-list li > .km-icon, .km-blackberry #my-drawer .km-list li > .km-icon
-        {
-            background-color: #4e4e4e;
-            color: #fff;
-        }
-
-        .km-ios #my-drawer .km-group-title,
-        .km-blackberry #my-drawer .km-group-title
-        {
-            background-color: #6e6e6e;
-            color: #fff;
-        }
-
-        .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
-        .km-settings:before, .km-settings:after { content: "\E0DA"; }
-        .km-off:before, .km-off:after { content: "\E0B9"; }
-
-        .km-ios #popover .km-view-title,
-        .km-ios #popover-people .km-view-title
-        {
-            color: #fff;
-            text-shadow: 0 -1px rgba(0,0,0,.5);
-        }
-
-      
-    </style>
-    
-<script>
-    // reset global drawer instance
-     kendo.mobile.ui.Drawer.current = null;
-    
-    function closeParentPopover(e) 
-    {
-        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
-        popover.close();
-    }
-</script>
-
-     <!-- Drawer  content-->
-    <div data-role="drawer" id="users-drawer" style="width: 270px" data-views="['/','tabstrip-mainview']">
-        <ul data-role="listview" data-type="group">
-            <li>Users
-                <ul>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Ivan</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Pesho</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Gosho</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Mom</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Dad</a></li>
-                    <li ><a href="#tabstrip-mainview" data-transition="none">Uncle</a></li>
-                </ul>
-            </li>
-            <li>Account
-                <ul>
-                    <li data-icon="settings">Settings</li>
-                    <li data-icon="off"><a href="">Log Out</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-  
+</div>

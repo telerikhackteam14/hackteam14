@@ -1,6 +1,6 @@
 (function (global) {
     var LoginViewModel,
-        app = global.app = global.app || {};
+    app = global.app = global.app || {};
 
     LoginViewModel = kendo.data.ObservableObject.extend({
         isLoggedIn: false,
@@ -9,16 +9,17 @@
 
         onLogin: function () {
             var that = this,
-                username = that.get("username").trim(),
-                password = that.get("password").trim();                
+            username = that.get("username").trim(),
+            password = that.get("password").trim();                
             if (username === "" || password === "") {
                 navigator.notification.alert("Both fields are required!",
-                    function () { }, "Login failed", 'OK');
+                                             function () {
+                                             }, "Login failed", 'OK');
 
                 return;
             }
                         
-            var loginSuccess = function (){
+            var loginSuccess = function () {
                 that.set("isLoggedIn", true);
                 
                 $("#invalid-credentials").toggleClass("hidden", true);
@@ -28,7 +29,7 @@
                 $('#taptrip-div').show();
             };
             
-            var loginError = function (){
+            var loginError = function () {
                 that.set("isLoggedIn", false);
                 
                 $("#invalid-credentials").toggleClass("hidden", false);
@@ -37,7 +38,6 @@
             };
             
             teamPulse.login(username, password, loginSuccess, loginError);
-                                  
         },
 
         onLogout: function () {
@@ -63,8 +63,29 @@
             }
         }
     });
-
+    
+    TaskDetailsViewModel = kendo.data.ObservableObject.extend({
+        onDoneClick: function(e) {
+            
+        },
+        onCancelClick: function(e) {
+            app.application.navigate('#tabstrip-mainview');
+        },      
+    });
+    AddTaskViewModel = kendo.data.ObservableObject.extend({
+        onDoneClick: function(e) {
+            //teamPulse.createNewItem(this.title, this.description, null, null, null);
+        },
+        onCancelClick: function(e) {
+            app.application.navigate('#tabstrip-mainview');
+        },
+        description: 'test description',
+        title: 'test'
+    });
+    
     app.loginService = {
-        viewModel: new LoginViewModel()
+        viewModel: new LoginViewModel(),
+        addTask: new AddTaskViewModel(),
+        taskDetails: new TaskDetailsViewModel()
     };
 })(window);

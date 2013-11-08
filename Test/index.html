@@ -10,10 +10,9 @@
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
   
-    <script src="scripts/login.js"></script>
-    <script src="scripts/app.js"></script>
     <script src="scripts/tp.js"></script>
-
+    <script src="scripts/login.js"></script>
+    <script src="scripts/app.js"></script>    
 </head>
     
 <body>
@@ -46,7 +45,6 @@
                 <div class="buttonArea">
                     <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
                 </div>
-                <label id="invalid-credentials" class="higlight hidden">Invalid username or password!</label>
             </form>
         </div>
 
@@ -54,15 +52,11 @@
 
 
     <div data-role="layout" data-id="tabstrip-layout" data-model="app.loginService.viewModel">
-        <!--Header-->
         <div data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </div>
-
-    </div>     
-
-    
+    </div>         
 </body>
 </html>

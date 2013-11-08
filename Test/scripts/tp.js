@@ -3,11 +3,13 @@ var TeamPulse = function() {
     this.accessToken = null;
     this.projectID = 1;
 	this.storyID = 2;
+    this.currentUser = null;
 }
 
 TeamPulse.prototype = {
     login: function(username, pass, onSuccess, onError) {
-        $.ajax({
+        var that = this;
+        $.ajax({    
             url: this.baseUrl + '/Authenticate/WRAPv0.9',
             data: {
                 wrap_client_id: 'uri:TeamPulse',
@@ -18,7 +20,7 @@ TeamPulse.prototype = {
             success: function (data) {
                 var accessToken = data.match(/wrap_access_token=(.*?)&/)[1];
                 
-                this.accessToken = decodeURIComponent(accessToken);
+                that.accessToken = decodeURIComponent(accessToken);
                 
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -33,10 +35,13 @@ TeamPulse.prototype = {
     },
         
     getAllUsers: function(onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/users',
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -51,10 +56,13 @@ TeamPulse.prototype = {
     },
         
     getCurrentUser: function(onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/users/me',
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { 
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -69,10 +77,13 @@ TeamPulse.prototype = {
     },
     
     getUserById: function(userId, onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/users/' + userId,
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { 
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -87,10 +98,11 @@ TeamPulse.prototype = {
     },
         
     getItemById: function(id, onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/workitems/'+ id,
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -104,8 +116,8 @@ TeamPulse.prototype = {
         });
     },
 
-
     getTasksForUser: function(userID, status, onSuccess, onError) {
+        var that = this;
         var oDataFilter = "$filter=AssignedToID eq " + userID;
         if(status) {
         	oDataFilter += " and Status eq '" + status + "'";
@@ -115,7 +127,7 @@ TeamPulse.prototype = {
             url: this.baseUrl + '/api/workitems' + oDataFilter,
             data: null,
             type: "GET",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -136,7 +148,7 @@ TeamPulse.prototype = {
             'ParentID': this.storyID,
             'tp_Assigndate_cf': AssignDate
         };
-    
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/workitems',
             data: JSON.stringify({
@@ -146,7 +158,9 @@ TeamPulse.prototype = {
             }),
             contentType: 'application/json; charset=utf-8',
             type: "POST",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { 
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -161,6 +175,7 @@ TeamPulse.prototype = {
     },
 
     updateItem: function(taskId, status, onSuccess, onError) {
+        var that = this;
         $.ajax({
             url: this.baseUrl + '/api/workitems/' + taskId,
             data: JSON.stringify({
@@ -168,7 +183,9 @@ TeamPulse.prototype = {
             }),
             contentType: 'application/json; charset=utf-8',
             type: "PUT",
-            beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'WRAP access_token=' + this.accessToken); },
+            beforeSend: function (xhr) { 
+                xhr.setRequestHeader('Authorization', 'WRAP access_token=' + that.accessToken); 
+            },
             success: function (data) {
                 if(typeof onSuccess === 'function') {
             		onSuccess(data);
@@ -184,6 +201,23 @@ TeamPulse.prototype = {
 }
 
 var teamPulse = new TeamPulse();
-
-
+teamPulse.login("test", "testtest", function() {
+        teamPulse.getCurrentUser(function(data) {
+            teamPulse.currentUser = data; 
+            teamPulse.getAllUsers(function(data) {
+            var dataSource = [];
+            var users = data.results;
+            for(var i = 0; i < users.length; i++) {
+                dataSource.push({"DisplayName": users[i].displayname});
+                if(teamPulse.currentUser.id == users[i].id) {
+                    $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, true));    
+                } else {
+                    $('#usersDropDownList').append(new Option(data.results[i].displayName, data.results[i].id, false, false));    
+                }
+                
+            }
+        });
+        });
+        
+});
 

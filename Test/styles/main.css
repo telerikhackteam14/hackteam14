@@ -1,3 +1,10 @@
+.hplogo {
+    display: block;
+    margin: 3em auto;
+    width: 242px;
+    height: 108px;
+    background: url('images/logo.png') no-repeat left top;
+}
 .km-flat .km-badge,
 .km-flat .km-rowinsert,
 .km-flat .km-rowdelete,
@@ -111,7 +118,6 @@
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.5);
 }
-
 #taskListView .statusButtons {
     display:none;
     position: absolute;
@@ -120,4 +126,8 @@
     width: 60px;
     background-color: #bd2729;
     color: #fff;
+}
+.hidden
+{    
+    display: none;
 }

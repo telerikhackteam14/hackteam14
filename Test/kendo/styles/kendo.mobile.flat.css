@@ -2259,6 +2259,17 @@ body:before {
   color: #fff;
   background: #14bbce;
 }
+.km-flat .km-content {
+  color: #fff;
+  background: #14bbce; /* Old browsers */
+background: -moz-linear-gradient(top,  #14bbce 1%, #1c96bc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#14bbce), color-stop(100%,#1c96bc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #14bbce 1%,#1c96bc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #14bbce 1%,#1c96bc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #14bbce 1%,#1c96bc 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #14bbce 1%,#1c96bc 100%); /* W3C */
+
+}
 .km-flat,
 .km-flat * {
   -moz-box-sizing: border-box;
@@ -2450,8 +2461,8 @@ body:before {
 }
 /* ListView */
 .km-flat .km-list > li {
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255,255,255,.25);
+  border: 1px solid rgba(255, 255, 255, .5);
   border-width: 0 0 1px 0;
 }
 .km-flat .km-listinset > li:first-child,

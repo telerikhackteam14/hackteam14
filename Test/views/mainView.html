@@ -4,26 +4,23 @@
 		<div data-role="navbar">
             <a data-role="button" data-rel="drawer" href="#users-drawer" data-icon="drawer-button" data-align="left"></a>
 			&lt; username here &gt;
-            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button" data-icon="action" ></a>
+            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button" data-icon="filter" ></a>
 		</div>
 	</header>
 
       <!-- Popover-->
-     <div data-role="popover" id="popover-people" data-popup='{"height": "15em", "width": "15em"}'>
-        <div data-role="view" data-title="People">
+     <div data-role="popover" id="popover-people" data-popup='{"height": "14em", "width": "15em"}'>
+        <div data-role="view">
             <div data-role="header">
                 <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                    <span data-role="view-title">&nbsp;</span>
+                    <a data-role="button" data-align="center" data-click="closeParentPopover">Apply</a>
                 </div>
             </div>
             <ul data-role="listview">
-                <li><label>Isabella Anderson<input type="checkbox"></label></li>
-                <li><label>Josh Anderson<input type="checkbox"></label></li>
-                <li><label>Linda Anderson<input type="checkbox"></label></li>
-                <li><label>Oliver Anderson<input type="checkbox"></label></li>
-                <li><label>James Williams<input type="checkbox"></label></li>
-                <li><label>Barbara Williams<input type="checkbox"></label></li>
+                <li><label>Not Done<input type="checkbox"></label></li>
+                <li><label>In progress<input type="checkbox"></label></li>
+                <li><label>Done<input type="checkbox"></label></li>
             </ul>
         </div>
     </div>
@@ -37,52 +34,13 @@
     <!--Footer-->
     <div data-role="footer"  >
         <div data-role="tabstrip" >
-            <a href="views/mainView.html" data-icon="home">Home</a>
-            <a href="views/addTaskView.html" data-icon="mostrecent"> Add</a>
+            <a href="views/pointsView.html" data-icon="favs">My Points</a>
+            <a href="views/mainView.html" data-icon="progress">My Tasks</a>
+            <a href="views/addTaskView.html" data-icon="plus">New Task</a>
         </div>
     </div>
     
     </div>
-
-
-    <style>
-        .km-ios #my-drawer .km-content, .km-android #my-drawer .km-content, .km-blackberry #my-drawer .km-content,
-        .km-ios #my-drawer .km-list > li, .km-android #my-drawer .km-list > li, .km-blackberry #my-drawer .km-list > li,
-        .km-ios #my-drawer .km-listview-link > .km-icon, .km-android #my-drawer .km-listview-link > .km-icon, .km-blackberry #my-drawer .km-listview-link > .km-icon,
-        .km-ios #my-drawer .km-list li > .km-icon, .km-android #my-drawer .km-list li > .km-icon, .km-blackberry #my-drawer .km-list li > .km-icon
-        {
-            background-color: #4e4e4e;
-            color: #fff;
-        }
-
-        .km-ios #my-drawer .km-group-title,
-        .km-blackberry #my-drawer .km-group-title
-        {
-            background-color: #6e6e6e;
-            color: #fff;
-        }
-
-        .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
-        .km-settings:before, .km-settings:after { content: "\E0DA"; }
-        .km-off:before, .km-off:after { content: "\E0B9"; }
-
-        .km-ios #popover .km-view-title,
-        .km-ios #popover-people .km-view-title
-        {
-            color: #fff;
-            text-shadow: 0 -1px rgba(0,0,0,.5);
-        }
-
-          #taskListView .statusButtons {
-            display:none;
-            position: absolute;
-            top: .15em;
-            right: .5em;
-            width: 60px;
-            background-color: #bd2729;
-            color: #fff;
-        }
-    </style>
     
 <script>
     // reset global drawer instance

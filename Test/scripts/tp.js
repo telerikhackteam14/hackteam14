@@ -5,6 +5,7 @@ var TeamPulse = function() {
 	this.storyID = 2;
     this.currentUser = null;
     this.status = "Done";
+    this.selectedUser = null;
 }
 
 TeamPulse.prototype = {

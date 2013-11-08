@@ -23,8 +23,17 @@
 .km-flat li.km-state-active .km-listview-label,
 .km-flat .km-state-active .km-listview-link:after
 {
-    color: red;
+    color:#171717;
 }
+
+
+.km-flat .km-popup.km-pane .km-navbar .km-button {
+ border-color: #14bbce;
+ padding: .3em .5em;
+    font-size: .8em;
+ line-height: 1em;
+}
+
 
 .km-flat .km-loader > *:not(h1),
 .km-flat .km-filter-wrap > input,
@@ -32,14 +41,14 @@
 .km-root .km-flat .km-scroller-refresh span:not(.km-template),
 .km-flat .km-listview-label input[type=checkbox]:checked:after
 {
-    background: #fff3c9;
+    background: #14bbce;
 }
 
 .km-flat .km-switch-handle,
 .km-flat .k-slider-selection,
 .km-flat .km-switch-background
 {
-    color: #ff6363;
+    color: #fff;
 }
 
 .km-flat .km-loader,
@@ -63,10 +72,42 @@
 .km-flat .km-listview-label input[type=radio]:checked,
 .km-flat .km-listview-label input[type=checkbox]:checked
 {
-    background: #ff6363;
+    background: rgba(255,255,255,.7);
+    color: #14bbce;
 }
 
 .km-flat .km-filter-wrap > input:focus
 {
-    border-color: #ff6363;
+    border-color: #fff;
+}
+
+
+.km-flat .km-left-drawer .km-content,
+.km-flat .km-left-drawer .km-list > li,
+.km-flat .km-left-drawer .km-listview-link > .km-icon,
+.km-flat .km-left-drawer .km-list li > .km-icon
+{
+    background-color: #4e4e4e;
+    color: #fff;
+}
+
+.km-flat .km-left-drawer .km-group-title
+{
+    background-color: #6e6e6e;
+    color: #fff;
+}
+
+.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+.km-settings:before, .km-settings:after { content: "\e20f"; }
+.km-off:before, .km-off:after { content: "\E0B9"; }
+.km-filter:before, .km-filter:after { content: "\E06C"; }
+.km-progress:before, .km-progress:after { content: "\E0BA"; }
+.km-plus:before, .km-plus:after { content: "\E200"; }
+.km-favs:before, .km-favs:after { content: "\E20c"; }
+
+.km-ios #popover .km-view-title,
+.km-ios #popover-people .km-view-title
+{
+    color: #fff;
+    text-shadow: 0 -1px rgba(0,0,0,.5);
 }

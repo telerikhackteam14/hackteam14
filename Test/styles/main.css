@@ -123,3 +123,10 @@
 {    
     display: none;
 }
+
+
+
+.km-on-ios.km-black-translucent-status-bar.km-app .km-popup .km-header .km-navbar {
+padding-top: 0;
+background-clip: border-box;
+}

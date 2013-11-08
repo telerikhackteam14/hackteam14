@@ -2,14 +2,9 @@
     app = global.app = global.app || {};
 
     TaskDetailsViewModel = kendo.data.ObservableObject.extend({
-        onDoneClick: function(e) {
-            
-        },
-        onCancelClick: function(e) {
-            app.application.navigate('#tabstrip-mainview');
-        },      
-        description: 'test description',
-        title: 'test'
+        onBackClick: function(e) {
+            app.application.navigate('views/mainView.html');
+        }
     });
     
     if (!app.taskService){

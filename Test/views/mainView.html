@@ -3,7 +3,7 @@
     <header data-role="header">
 		<div data-role="navbar">
             <a data-role="button" data-rel="drawer" href="#users-drawer" data-icon="drawer-button" data-align="left"></a>
-			&lt; username here &gt;
+			<span id="username"></span>
             <a data-align="right" data-rel="popover" href="#popover-people" data-role="button" data-icon="filter" ></a>
 		</div>
 	</header>
@@ -52,6 +52,7 @@
         popover.close();
     }
     function onMainViewLoaded() {
+        $("#username").text(teamPulse.currentUser.displayName);
         teamPulse.getTasksForUser(teamPulse.currentUser.id, null, function(data){
             $('#taskListView').kendoMobileListView({ 
                 dataSource: data.results,

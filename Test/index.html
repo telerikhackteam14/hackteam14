@@ -8,7 +8,7 @@
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="kendo/js/kendo.all.min.js"></script>
   
     <script src="scripts/tp.js"></script>
     <script src="scripts/login.js"></script>
@@ -25,7 +25,7 @@
         data-model="app.loginService.viewModel">
 
         <div class="view-content">
-            <div class="logo"></div>
+            <div class="hplogo"></div>
             <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
             
             <form data-bind="events: { keyup: checkEnter }">
@@ -43,9 +43,8 @@
                         </label>
                     </li>
                 </ul>
-
-                <div class="buttonArea">
-                    <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
+                <div style="text-align: center;">
+                <input type="submit" id="login" data-role="button" style="width: 15em; margin: 2em auto 0; background: #fff" data-bind="click: onLogin, invisible: isLoggedIn" value="Login" />
                 </div>
                 <label id="invalid-credentials" class="hidden">Invalid username or password</label>
             </form>

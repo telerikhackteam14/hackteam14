@@ -2,10 +2,64 @@
     <header data-role="header">
 		<div data-role="navbar">
 			My Points
+            
 		</div>
 	</header>	
+    <div style="font-size: 8em; padding-top: .1em; font-weight: bold; text-align: center;">27</div>
     
+    <div id="chart" style="background: none; height: 15em;"></div>
+    
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Past weeks stats",
+                    color: "#fff"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    
+                },
+                series: [{
+                    name: "Points per week",
+                    data: [21, 24, 28, 22, 26, 10, 16, 27],
+                    color: "#000"
+                }],
+                valueAxis: {
+                    labels: {
+                        color: "#fff"
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                categoryAxis: {
+                    categories: [11, 12, 13, 14, 15, 16, 17, 18],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    labels: {
+                        color: "#fff"
+                    },
+                    color: "#fff"
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });
+        }
 
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
     
     <div data-role="footer"  >
         <div data-role="tabstrip" >

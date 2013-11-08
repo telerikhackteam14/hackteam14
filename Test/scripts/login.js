@@ -64,34 +64,8 @@
         }
     });
     
-    TaskDetailsViewModel = kendo.data.ObservableObject.extend({
-        onDoneClick: function(e) {
-            
-        },
-        onCancelClick: function(e) {
-            app.application.navigate('#tabstrip-mainview');
-        },      
-        description: 'test description',
-        title: 'test'
-    });
-    AddTaskViewModel = kendo.data.ObservableObject.extend({
-        onDoneClick: function(e) {
-            //teamPulse.createNewItem(this.title, this.description, null, null, null);
-        },
-        onCancelClick: function(e) {
-            app.application.navigate('#tabstrip-mainview');
-        },
-        onDetailsViewOpen: function(e) {
-            
-        },
-        description: 'test description',
-        title: 'test',
-        TestId: '123'
-    });
     
     app.loginService = {
-        viewModel: new LoginViewModel(),
-        addTask: new AddTaskViewModel(),
-        taskDetails: new TaskDetailsViewModel()
+        viewModel: new LoginViewModel()
     };
 })(window);
